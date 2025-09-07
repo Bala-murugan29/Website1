@@ -30,22 +30,22 @@ export const ProjectsSection = () => {
   ];
 
   return (
-    <section id="projects" className="py-32 relative">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 gradient-text">
+    <section id="projects" className="py-16 md:py-32 relative">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-4 md:mb-6 gradient-text">
             Featured Projects
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
             A showcase of my latest work and creative solutions
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 max-w-7xl mx-auto">
           {projects.map((project, index) => (
             <div
               key={project.id}
-              className={`group relative overflow-hidden rounded-3xl transition-all duration-500 hover:scale-105 ${
+              className={`group relative overflow-hidden rounded-2xl md:rounded-3xl transition-all duration-500 hover:scale-105 ${
                 project.featured ? 'lg:col-span-1' : 'lg:col-span-1'
               }`}
               onMouseEnter={() => setHoveredProject(project.id)}
@@ -53,7 +53,7 @@ export const ProjectsSection = () => {
               style={{ animationDelay: `${index * 0.2}s` }}
             >
               {/* Project Image */}
-              <div className="relative aspect-[4/3] overflow-hidden">
+              <div className="relative aspect-[4/3] md:aspect-[4/3] overflow-hidden">
                 <img 
                   src={project.image}
                   alt={project.title}
@@ -71,13 +71,13 @@ export const ProjectsSection = () => {
                   <div className="absolute inset-0 bg-primary/20 backdrop-blur-sm" style={{ zIndex: 1 }} />
                   <div className="absolute inset-0 flex items-center justify-center" style={{ zIndex: 2 }}>
                     <Button
-                      size="lg"
+                      size="sm"
                       variant="outline"
-                      className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30"
+                      className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 text-sm md:text-base"
                       asChild
                     >
                       <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                        <Github className="w-5 h-5 mr-2" />
+                        <Github className="w-4 h-4 md:w-5 md:h-5 mr-2" />
                         Code
                       </a>
                     </Button>
@@ -86,19 +86,19 @@ export const ProjectsSection = () => {
               </div>
 
               {/* Project Info */}
-              <div className="absolute bottom-0 left-0 right-0 p-8">
-                <div className="glass-card p-6 transform transition-transform duration-300 group-hover:translate-y-[-8px]">
-                  <h3 className="text-2xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
+              <div className="absolute bottom-0 left-0 right-0 p-4 md:p-8">
+                <div className="glass-card p-4 md:p-6 transform transition-transform duration-300 group-hover:translate-y-[-8px]">
+                  <h3 className="text-lg md:text-2xl font-bold text-foreground mb-2 md:mb-3 group-hover:text-primary transition-colors duration-300">
                     {project.title}
                   </h3>
-                  <p className="text-muted-foreground mb-4 leading-relaxed">
+                  <p className="text-sm md:text-base text-muted-foreground mb-3 md:mb-4 leading-relaxed line-clamp-3">
                     {project.description}
                   </p>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1 md:gap-2">
                     {project.technologies.map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium border border-primary/20"
+                        className="px-2 md:px-3 py-1 bg-primary/10 text-primary rounded-full text-xs md:text-sm font-medium border border-primary/20"
                       >
                         {tech}
                       </span>
