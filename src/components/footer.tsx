@@ -4,10 +4,9 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: Github, href: "#", label: "GitHub" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Mail, href: "#", label: "Email" }
+    { icon: Github, href: "https://github.com/Bala-murugan29", label: "GitHub" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/balamurugan-r/", label: "LinkedIn" },
+    { icon: Mail, href: "mailto:r.balamurugan.dev@gmail.com", label: "Email" }
   ];
 
   return (
@@ -15,7 +14,7 @@ export const Footer = () => {
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-8 md:mb-0">
-            <h3 className="text-2xl font-bold gradient-text mb-2">Alex Johnson</h3>
+            <h3 className="text-2xl font-bold gradient-text mb-2">Balamurugan</h3>
             <p className="text-muted-foreground">
               Creating exceptional digital experiences
             </p>
@@ -37,7 +36,7 @@ export const Footer = () => {
 
         <div className="border-t border-border/50 mt-12 pt-8 text-center">
           <p className="text-muted-foreground">
-            © {currentYear} Alex Johnson. All rights reserved. Built with React & Tailwind CSS.
+            {currentYear} Balamurugan R. Built with React & Tailwind CSS.
           </p>
         </div>
       </div>

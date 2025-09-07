@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { toast } from "sonner";
+import emailjs from '@emailjs/browser';
 
 export const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -12,12 +13,36 @@ export const ContactSection = () => {
     subject: "",
     message: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate form submission
-    toast.success("Message sent successfully! I'll get back to you soon.");
-    setFormData({ name: "", email: "", subject: "", message: "" });
+    setIsSubmitting(true);
+
+    try {
+      // EmailJS configuration from environment variables
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        to_email: 'r.balamurugan.dev@gmail.com'
+      };
+
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+
+      toast.success("Message sent successfully! I'll get back to you soon.");
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      toast.error("Failed to send message. Please try again or contact me directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -31,20 +56,15 @@ export const ContactSection = () => {
     {
       icon: Mail,
       label: "Email",
-      value: "alex@example.com",
-      href: "mailto:alex@example.com"
+                 value: "r.balamurugan.dev@gmail.com",
+                 href: "mailto:r.balamurugan.dev@gmail.com"
     },
-    {
-      icon: Phone,
-      label: "Phone",
-      value: "+1 (555) 123-4567",
-      href: "tel:+15551234567"
-    },
+    
     {
       icon: MapPin,
       label: "Location",
-      value: "San Francisco, CA",
-      href: "#"
+      value: "Villupuram ,Tamil Nadu,India",
+      
     }
   ];
 
@@ -132,10 +152,11 @@ export const ContactSection = () => {
                 <Button 
                   type="submit"
                   size="lg"
-                  className="w-full bg-gradient-primary hover:shadow-glow transition-all duration-300"
+                  disabled={isSubmitting}
+                  className="w-full bg-gradient-primary hover:shadow-glow transition-all duration-300 disabled:opacity-50"
                 >
                   <Send className="w-5 h-5 mr-2" />
-                  Send Message
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>
               </form>
             </div>
@@ -169,19 +190,6 @@ export const ContactSection = () => {
                     </a>
                   ))}
                 </div>
-              </div>
-
-              {/* Availability */}
-              <div className="glass-card p-8 hover:shadow-elevated transition-all duration-300">
-                <h3 className="text-xl font-bold text-foreground mb-4">Availability</h3>
-                <div className="flex items-center space-x-3 mb-4">
-                  <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-                  <span className="text-foreground font-medium">Available for new projects</span>
-                </div>
-                <p className="text-muted-foreground">
-                  Currently accepting new client work for Q1 2024. 
-                  Response time: Usually within 24 hours.
-                </p>
               </div>
             </div>
           </div>

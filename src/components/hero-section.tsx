@@ -54,7 +54,7 @@ export const HeroSection = () => {
         <div className="animate-fade-in-up">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
             <span className="block text-foreground">Hello, I'm</span>
-            <span className="block gradient-text glow-text">Alex Johnson</span>
+            <span className="block gradient-text glow-text">Balamurugan</span>
           </h1>
           
           <div className="h-20 flex items-center justify-center mb-8">
@@ -90,9 +90,9 @@ export const HeroSection = () => {
           {/* Social Links */}
           <div className="flex justify-center space-x-6 mb-16">
             {[
-              { icon: Github, href: "#", label: "GitHub" },
-              { icon: Linkedin, href: "#", label: "LinkedIn" },
-              { icon: Mail, href: "#", label: "Email" }
+              { icon: Github, href: "https://github.com/Bala-murugan29", label: "GitHub" },
+              { icon: Linkedin, href: "https://www.linkedin.com/in/bala-murugan-r-4ba525330/", label: "LinkedIn" },
+                { icon: Mail, href: "mailto:r.balamurugan.dev@gmail.com ", label: "Email" }
             ].map(({ icon: Icon, href, label }) => (
               <a
                 key={label}

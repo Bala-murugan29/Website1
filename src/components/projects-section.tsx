@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ExternalLink, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import project1 from "@/assets/project1.jpg";
+import project1 from "@/assets/hungerlink-screenshot.png";
 import project2 from "@/assets/project2.jpg"; 
 import project3 from "@/assets/project3.jpg";
 
@@ -11,33 +11,21 @@ export const ProjectsSection = () => {
   const projects = [
     {
       id: 1,
-      title: "Dashboard Analytics Platform",
-      description: "A comprehensive analytics dashboard built with React and D3.js, featuring real-time data visualization and interactive charts.",
+      title: "Hungerlink",
+      description: "A MERN-based food donation platform with React and Tailwind, featuring donor and recipient dashboards, NGO verification, and an AI-powered freshness checker for safe food sharing.",
       image: project1,
-      technologies: ["React", "TypeScript", "D3.js", "Node.js", "PostgreSQL"],
-      liveUrl: "#",
-      githubUrl: "#",
+      technologies: ["React", "TypeScript",  "Node.js", "Mongodb"],
+      githubUrl: "https://github.com/Bala-murugan29/Hungerlink",
       featured: true
     },
     {
       id: 2,
-      title: "E-Commerce Mobile App",
-      description: "Cross-platform mobile application with seamless shopping experience, payment integration, and inventory management.",
+      title: "Parental + Study app",
+      description: "Cross-platform mobile app that is used to parental+studing purposes .",
       image: project2,
-      technologies: ["React Native", "Redux", "Firebase", "Stripe"],
-      liveUrl: "#",
-      githubUrl: "#",
+      technologies: ["flutter"],
+      githubUrl: "https://github.com/Bala-murugan29/Study-Buddy",
       featured: true
-    },
-    {
-      id: 3,
-      title: "Creative Portfolio Website",
-      description: "A stunning portfolio website with advanced animations, 3D elements, and smooth user interactions.",
-      image: project3,
-      technologies: ["Next.js", "Three.js", "Framer Motion", "Tailwind CSS"],
-      liveUrl: "#",
-      githubUrl: "#",
-      featured: false
     }
   ];
 
@@ -74,20 +62,14 @@ export const ProjectsSection = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-60" />
                 
                 {/* Overlay on hover */}
-                <div className={`absolute inset-0 bg-primary/20 backdrop-blur-sm transition-opacity duration-300 ${
-                  hoveredProject === project.id ? 'opacity-100' : 'opacity-0'
-                }`}>
-                  <div className="absolute inset-0 flex items-center justify-center space-x-4">
-                    <Button
-                      size="lg"
-                      className="bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30"
-                      asChild
-                    >
-                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="w-5 h-5 mr-2" />
-                        Live Demo
-                      </a>
-                    </Button>
+                <div
+                  className={`absolute inset-0 transition-opacity duration-300 ${
+                    hoveredProject === project.id ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+                  }`}
+                  style={{ zIndex: 2 }}
+                >
+                  <div className="absolute inset-0 bg-primary/20 backdrop-blur-sm" style={{ zIndex: 1 }} />
+                  <div className="absolute inset-0 flex items-center justify-center" style={{ zIndex: 2 }}>
                     <Button
                       size="lg"
                       variant="outline"
@@ -128,15 +110,7 @@ export const ProjectsSection = () => {
           ))}
         </div>
 
-        <div className="text-center mt-16">
-          <Button 
-            size="lg"
-            variant="outline"
-            className="border-primary/30 hover:border-primary hover:bg-primary/10 transition-all duration-300"
-          >
-            View All Projects
-          </Button>
-        </div>
+        
       </div>
     </section>
   );

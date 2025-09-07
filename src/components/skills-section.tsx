@@ -98,8 +98,8 @@ export const SkillsSection = () => {
           <div className="flex flex-wrap justify-center gap-4">
             {[
               "React", "TypeScript", "Node.js", "Python", "PostgreSQL", "MongoDB",
-              "Next.js", "Vue.js", "Express", "FastAPI", "Docker", "AWS",
-              "Figma", "Tailwind CSS", "Framer Motion", "Three.js"
+               "Vue.js", "Express", "FastAPI",
+              "Figma", "Tailwind CSS"
             ].map((tech, index) => (
               <div 
                 key={tech}
