@@ -1,6 +1,8 @@
 
 
 
+import balaImage from "@/assets/bala.jpg";
+
 export const AboutSection = () => {
   return (
   <section id="about" className="py-32 relative bg-background">
@@ -20,7 +22,7 @@ export const AboutSection = () => {
             <div className="space-y-8 animate-fade-in-up">
               <div className="flex flex-col items-center">
                 <img
-                  src="./src/assets/bala.jpg"
+                  src={balaImage}
                   alt="Bala"
                   className="w-70 h-70 rounded-full object-cover border-4 border-purple-500 shadow-xl mb-6 animate-fade-in"
                 />
