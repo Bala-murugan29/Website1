@@ -100,7 +100,7 @@
 
 @layer components {
   .glass-card {
-    @apply bg-glass backdrop-blur-xl border border-glass-border shadow-card rounded-radius;
+    @apply bg-glass backdrop-blur-xl border border-glass-border shadow-card rounded-lg;
   }
 
   .glow-text {
