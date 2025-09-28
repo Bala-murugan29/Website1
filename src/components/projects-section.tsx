@@ -85,8 +85,8 @@ export const ProjectsSection = () => {
                 </div>
               </div>
 
-              {/* Project Info */}
-              <div className="absolute bottom-0 left-0 right-0 p-4 md:p-8">
+              {/* Project Info - static on mobile, absolute on desktop */}
+              <div className="p-4 md:p-8 md:absolute md:bottom-0 md:left-0 md:right-0">
                 <div className="glass-card p-4 md:p-6 transform transition-transform duration-300 group-hover:translate-y-[-8px]">
                   <h3 className="text-lg md:text-2xl font-bold text-foreground mb-2 md:mb-3 group-hover:text-primary transition-colors duration-300">
                     {project.title}

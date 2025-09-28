@@ -69,26 +69,26 @@ export const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="py-32 relative">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 gradient-text">
+    <section id="contact" className="py-12 md:py-32 relative">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="text-center mb-10 md:mb-16">
+          <h2 className="text-2xl md:text-4xl lg:text-6xl font-bold mb-4 md:mb-6 gradient-text">
             Let's Work Together
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto">
             Ready to bring your ideas to life? Let's discuss your next project
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 max-w-6xl mx-auto">
           {/* Contact Form */}
           <div className="animate-fade-in-up">
-            <div className="glass-card p-8 hover:shadow-elevated transition-all duration-300">
-              <h3 className="text-2xl font-bold text-foreground mb-6">Send a Message</h3>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
+            <div className="glass-card p-4 md:p-8 hover:shadow-elevated transition-all duration-300">
+              <h3 className="text-lg md:text-2xl font-bold text-foreground mb-4 md:mb-6">Send a Message</h3>
+              <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
+                    <label htmlFor="name" className="block text-xs md:text-sm font-medium text-foreground mb-1 md:mb-2">
                       Name *
                     </label>
                     <Input
@@ -102,7 +102,7 @@ export const ContactSection = () => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                    <label htmlFor="email" className="block text-xs md:text-sm font-medium text-foreground mb-1 md:mb-2">
                       Email *
                     </label>
                     <Input
@@ -119,7 +119,7 @@ export const ContactSection = () => {
                 </div>
                 
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
+                  <label htmlFor="subject" className="block text-xs md:text-sm font-medium text-foreground mb-1 md:mb-2">
                     Subject *
                   </label>
                   <Input
@@ -134,7 +134,7 @@ export const ContactSection = () => {
                 </div>
                 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
+                  <label htmlFor="message" className="block text-xs md:text-sm font-medium text-foreground mb-1 md:mb-2">
                     Message *
                   </label>
                   <Textarea
@@ -151,11 +151,11 @@ export const ContactSection = () => {
                 
                 <Button 
                   type="submit"
-                  size="lg"
+                  size="sm"
                   disabled={isSubmitting}
-                  className="w-full bg-gradient-primary hover:shadow-glow transition-all duration-300 disabled:opacity-50"
+                  className="w-full bg-gradient-primary hover:shadow-glow transition-all duration-300 disabled:opacity-50 text-xs md:text-base md:size-lg"
                 >
-                  <Send className="w-5 h-5 mr-2" />
+                  <Send className="w-4 h-4 md:w-5 md:h-5 mr-2" />
                   {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>
               </form>
@@ -164,28 +164,28 @@ export const ContactSection = () => {
 
           {/* Contact Info */}
           <div className="animate-slide-in-right">
-            <div className="space-y-8">
-              <div className="glass-card p-8 hover:shadow-elevated transition-all duration-300">
-                <h3 className="text-2xl font-bold text-foreground mb-6">Get In Touch</h3>
-                <p className="text-muted-foreground mb-8 leading-relaxed">
+            <div className="space-y-6 md:space-y-8">
+              <div className="glass-card p-4 md:p-8 hover:shadow-elevated transition-all duration-300">
+                <h3 className="text-lg md:text-2xl font-bold text-foreground mb-4 md:mb-6">Get In Touch</h3>
+                <p className="text-muted-foreground mb-4 md:mb-8 leading-relaxed text-sm md:text-base">
                   I'm always interested in hearing about new projects and opportunities. 
                   Whether you're a company looking to hire, or you're someone with an 
                   interesting project, I'd love to hear from you.
                 </p>
                 
-                <div className="space-y-6">
+                <div className="space-y-4 md:space-y-6">
                   {contactInfo.map((item, index) => (
                     <a
                       key={index}
                       href={item.href}
-                      className="flex items-center space-x-4 p-4 rounded-xl hover:bg-muted/30 transition-colors duration-300 group"
+                      className="flex items-center space-x-2 md:space-x-4 p-2 md:p-4 rounded-xl hover:bg-muted/30 transition-colors duration-300 group"
                     >
-                      <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <item.icon className="w-6 h-6 text-white" />
+                      <div className="w-8 h-8 md:w-12 md:h-12 bg-gradient-primary rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <item.icon className="w-4 h-4 md:w-6 md:h-6 text-white" />
                       </div>
                       <div>
-                        <h4 className="font-semibold text-foreground">{item.label}</h4>
-                        <p className="text-muted-foreground">{item.value}</p>
+                        <h4 className="font-semibold text-foreground text-xs md:text-base">{item.label}</h4>
+                        <p className="text-muted-foreground text-xs md:text-base">{item.value}</p>
                       </div>
                     </a>
                   ))}
