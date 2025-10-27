@@ -31,7 +31,7 @@ const achievements: Achievement[] = [
   {
     id: "online-1",
     type: "online",
-    title: "Online Event",
+    title: "Eclearnix National Level Hackathon",
     date: "August 2025 - September 2025",
     summary: "Participated in Product & Innovation Challenge — Certificate awarded.",
     cert: productCertImg,
