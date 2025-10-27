@@ -8,6 +8,7 @@ interface NavigationProps {
 export const Navigation = ({ className }: NavigationProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,6 +58,7 @@ export const Navigation = ({ className }: NavigationProps) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setIsMenuOpen(false); // Close menu after clicking
     }
   };
 
@@ -85,10 +87,14 @@ export const Navigation = ({ className }: NavigationProps) => {
             ))}
           </div>
 
-          <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-4">
             {/* mobile menu button */}
             <div className="md:hidden">
-              <button className="text-foreground hover:text-primary transition-colors" aria-label="Open menu">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="text-foreground hover:text-primary transition-colors"
+                aria-label="Open menu"
+              >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
@@ -118,6 +124,21 @@ export const Navigation = ({ className }: NavigationProps) => {
             </div>
           </div>
         </div>
+
+        {/* mobile menu */}
+        {isMenuOpen && (
+          <div className="md:hidden mt-4 pb-4 space-y-3 border-t border-primary/10 pt-4">
+            {['home', 'about', 'skills', 'projects', 'achievements', 'contact'].map((item) => (
+              <button
+                key={item}
+                onClick={() => scrollToSection(item)}
+                className="block w-full text-left px-4 py-2 rounded-md text-foreground hover:bg-primary/10 hover:text-primary transition-colors capitalize"
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </nav>
   );
