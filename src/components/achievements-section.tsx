@@ -32,7 +32,7 @@ const achievements: Achievement[] = [
     id: "online-1",
     type: "online",
     title: "Online Event",
-    date: "27/09/25",
+    date: "August 2025 - September 2025",
     summary: "Participated in Product & Innovation Challenge — Certificate awarded.",
     cert: productCertImg,
     logoColor: "bg-[#00E0B8]",
