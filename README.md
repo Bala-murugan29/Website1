@@ -36,3 +36,12 @@ You can deploy this project using Vercel, Netlify, or any static hosting provide
 ## Custom Domain
 
 To connect a custom domain, follow your hosting provider's instructions.
+
+## Environment variables (for contact form)
+
+- VITE_FORMSPREE_ENDPOINT: (optional) your Formspree endpoint, e.g. `https://formspree.io/f/your-id`. When set, the contact form will POST to Formspree.
+- VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, VITE_EMAILJS_PUBLIC_KEY: (optional) EmailJS client-side keys. The project falls back to EmailJS if Formspree is not configured.
+
+Notes:
+- Do NOT commit a local `.env` file. Add `.env` to `.gitignore` (already present) and set these variables in your host (Vercel/Netlify/GitHub Pages CI) or locally before building.
+- On Vercel previews: make sure devDependencies are installed during build (set Install Command to `npm ci --include=dev` or set the environment variable `NPM_CONFIG_PRODUCTION=false`) so `vite` is available in the build step.
