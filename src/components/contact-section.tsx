@@ -21,9 +21,17 @@ export const ContactSection = () => {
 
     try {
       // EmailJS configuration from environment variables
-      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID as string | undefined;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string | undefined;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string | undefined;
+
+      // Validate configuration early and show helpful message if missing
+      if (!serviceId || !templateId || !publicKey) {
+        console.warn('EmailJS configuration missing', { serviceId, templateId, publicKey });
+        toast.error("Email service is not configured. Please set EmailJS keys in your environment.");
+        setIsSubmitting(false);
+        return;
+      }
 
       const templateParams = {
         from_name: formData.name,
