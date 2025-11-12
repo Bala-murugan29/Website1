@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { toast } from "sonner";
-import emailjs from '@emailjs/browser';
 
 export const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -20,28 +19,63 @@ export const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      // EmailJS configuration from environment variables
-      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID as string | undefined;
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string | undefined;
-      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string | undefined;
+      // Use Formspree endpoint (recommended) or fallback to EmailJS if configured.
+      // Read Formspree endpoint from env: VITE_FORMSPREE_ENDPOINT
+      const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT as string | undefined;
 
-      // Validate configuration early and show helpful message if missing
-      if (!serviceId || !templateId || !publicKey) {
-        console.warn('EmailJS configuration missing', { serviceId, templateId, publicKey });
-        toast.error("Email service is not configured. Please set EmailJS keys in your environment.");
-        setIsSubmitting(false);
-        return;
+      if (formspreeEndpoint) {
+        const payload = {
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          _replyto: formData.email,
+        };
+
+        const res = await fetch(formspreeEndpoint, {
+          method: "POST",
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        if (!res.ok) {
+          const text = await res.text().catch(() => "");
+          console.error("Formspree response not OK:", res.status, text);
+          throw new Error("Formspree submission failed");
+        }
+
+        toast.success("Message sent successfully! I'll get back to you soon.");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        // If Formspree not configured, try EmailJS if env vars exist
+        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID as string | undefined;
+        const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string | undefined;
+        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string | undefined;
+
+        if (!serviceId || !templateId || !publicKey) {
+          console.warn('No form provider configured', { formspreeEndpoint, serviceId, templateId, publicKey });
+          toast.error("Email service is not configured. Please set VITE_FORMSPREE_ENDPOINT or EmailJS keys in your environment.");
+          setIsSubmitting(false);
+          return;
+        }
+
+        const templateParams = {
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          to_email: 'r.balamurugan.dev@gmail.com'
+        };
+
+        // dynamic import of emailjs to avoid bundling if not used
+        const emailjs = (await import('@emailjs/browser')).default;
+        await emailjs.send(serviceId, templateId, templateParams, publicKey);
+        toast.success("Message sent successfully! I'll get back to you soon.");
+        setFormData({ name: "", email: "", subject: "", message: "" });
       }
-
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
-        subject: formData.subject,
-        message: formData.message,
-        to_email: 'r.balamurugan.dev@gmail.com'
-      };
-
-      await emailjs.send(serviceId, templateId, templateParams, publicKey);
 
       toast.success("Message sent successfully! I'll get back to you soon.");
       setFormData({ name: "", email: "", subject: "", message: "" });
